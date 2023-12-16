@@ -21,12 +21,13 @@ import {
 } from '@mui/material';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import groupData from '../../data/groupData';
 import campaignsData from '../../data/campaignsData';
 import {
   addCommas,
   capitalizeFirstLetter,
+  changet,
   createData,
   sumColumn,
 } from '../../utils/helpers';
@@ -66,7 +67,7 @@ function CardHeader({ children }) {
 }
 
 function SelectMetric({ metric, onMetricChange }) {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
   return (
     <FormControl sx={{ minWidth: 110, position: 'relative' }}>
       <Select
@@ -80,7 +81,7 @@ function SelectMetric({ metric, onMetricChange }) {
           fontSize: 'small',
           '& > *': {
             fontSize: 'small',
-            p: "4px 10px !important"
+            p: '4px 10px !important',
           },
         }}
         onOpen={() => setActive(true)}
@@ -91,14 +92,26 @@ function SelectMetric({ metric, onMetricChange }) {
         <MenuItem value='conversions'>Conversions</MenuItem>
         <MenuItem value='revenue'>Revenue</MenuItem>
       </Select>
-      <Box sx={{ position: 'absolute', height: .2, right: 6, top: 3.6, bgcolor: "white" }}>
-        {active ? <KeyboardArrowUp fontSize='1rem'/> : <KeyboardArrowDown fontSize='1rem'/>}
+      <Box
+        sx={{
+          position: 'absolute',
+          height: 0.2,
+          right: 6,
+          top: 3.6,
+          bgcolor: 'white',
+        }}
+      >
+        {active ? (
+          <KeyboardArrowUp fontSize='1rem' />
+        ) : (
+          <KeyboardArrowDown fontSize='1rem' />
+        )}
       </Box>
     </FormControl>
   );
 }
 
-function InsightTable({ data }) {
+function InsightTable({ data, onSort }) {
   const objectKeys = Object.keys(data[0]);
   return (
     <TableContainer
@@ -131,6 +144,7 @@ function InsightTable({ data }) {
                     fontSize: '.9rem',
                     fill: '#CCC',
                   }}
+                  onClick={() => onSort(objectKeys[0])}
                 />
               </Stack>
             </TableCell>
@@ -138,7 +152,11 @@ function InsightTable({ data }) {
             {objectKeys.map(
               (key, index) =>
                 index !== 0 && (
-                  <TableCell align='right' sx={{ position: 'relative' }}>
+                  <TableCell
+                    key={index + 'tableG'}
+                    align='right'
+                    sx={{ position: 'relative' }}
+                  >
                     {capitalizeFirstLetter(key)}
                     <UnfoldMoreOutlinedIcon
                       sx={{
@@ -148,6 +166,7 @@ function InsightTable({ data }) {
                         right: '.8rem',
                         fill: '#CCC',
                       }}
+                      onClick={() => onSort(key)}
                     />
                   </TableCell>
                 )
@@ -229,7 +248,7 @@ const size = {
   height: 300,
 };
 
-function InsightPieChart({ pieChartData, metric }) {
+function InsightPieChart({ pieChartData }) {
   const percentageSum = pieChartData.reduce((acc, current) => {
     return (
       acc + Math.floor((current.value / sumColumn(pieChartData, 'value')) * 100)
@@ -256,13 +275,18 @@ function InsightPieChart({ pieChartData, metric }) {
         {...size}
       />
       <Stack sx={{ position: 'absolute', top: '35%', left: '56%' }} gap={2}>
-        {pieChartData.map((data) => {
+        {pieChartData.map((data, index) => {
           const value = Math.floor(
             (data.value / sumColumn(pieChartData, 'value')) * 100
           );
           const offset = data.label === 'Unknown' ? difference : 0;
           return (
-            <Stack direction='row' gap={2} alignItems='center'>
+            <Stack
+              key={index + 'pie'}
+              direction='row'
+              gap={2}
+              alignItems='center'
+            >
               <Box
                 sx={{
                   bgcolor: data.color,
@@ -284,21 +308,71 @@ function InsightPieChart({ pieChartData, metric }) {
   );
 }
 
+let currentSortCampaigns = 'campaigns';
+let campaignsSortAsc = true;
+let currentSortGroup = 'group';
+let groupSortAsc = true;
+
+function sortCampaigns(key, data) {
+  if (key === Object.keys(data[0])[0]) {
+    if (campaignsSortAsc) {
+      campaignsSortAsc = false;
+      return data.slice().sort((a, b) => b[key].localeCompare(a[key]));
+    }
+    campaignsSortAsc = true;
+    return data.slice().sort((a, b) => a[key].localeCompare(b[key]));
+  }
+  if (campaignsSortAsc) {
+    campaignsSortAsc = false;
+    return data.slice().sort((a, b) => b[key] - a[key]);
+  }
+  campaignsSortAsc = true;
+  return data.slice().sort((a, b) => a[key] - b[key]);
+}
+
+function sortGroup(key, data) {
+  if (key === Object.keys(data[0])[0]) {
+    if (groupSortAsc) {
+      groupSortAsc = false;
+      return data.slice().sort((a, b) => b[key].localeCompare(a[key]));
+    }
+    groupSortAsc = true;
+    return data.slice().sort((a, b) => a[key].localeCompare(b[key]));
+  }
+  if (groupSortAsc) {
+    groupSortAsc = false;
+    return data.slice().sort((a, b) => b[key] - a[key]);
+  }
+  groupSortAsc = true;
+  return data.slice().sort((a, b) => a[key] - b[key]);
+}
+
 function Dashboard() {
-  console.log(createData(groupData, 'clicks'));
   const [pieChartView, setPieChartView] = useState(true);
   const [pieChartData, setPieChartData] = useState(
     createData(groupData, 'clicks')
   );
-  // const [campaignsSort, setCampaignsSort] = useState("campaigns");
-  // const [groupSort, setGroupSort] = useState("group");
-  // const [campaignsSortAsc, setCampaignsSortAsc] = useState(true);
-  // const [groupSortAsc, setGroupSortAsc] = useState(true);
   const [metric, setMetric] = useState('clicks');
   const handleMetricChange = (event) => {
     setMetric(event.target.value);
     setPieChartData(createData(groupData, event.target.value));
   };
+  const [campaignsDataSorted, setCampaignsDataSorted] = useState(campaignsData);
+  const [groupDataSorted, setGroupDataSorted] = useState(groupData);
+  function handleCampaignsSort(key) {
+    if (currentSortCampaigns === key)
+      return setCampaignsDataSorted(sortCampaigns(key, campaignsData));
+    currentSortCampaigns = key;
+    campaignsSortAsc = true;
+    handleCampaignsSort(key);
+  }
+  function handleGroupSort(key) {
+    if (currentSortGroup === key)
+      return setGroupDataSorted(sortGroup(key, groupData));
+    currentSortGroup = key;
+    groupSortAsc = true;
+    handleGroupSort(key);
+  }
   return (
     <div>
       <Stack spacing={4} direction='row'>
@@ -309,7 +383,10 @@ function Dashboard() {
           <CardContent sx={{ p: 0, paddingBottom: '0 !important' }}>
             <CardHeader />
             <Divider />
-            <InsightTable data={campaignsData} />
+            <InsightTable
+              data={campaignsDataSorted}
+              onSort={handleCampaignsSort}
+            />
           </CardContent>
         </Card>
         <Card
@@ -329,7 +406,7 @@ function Dashboard() {
             {pieChartView ? (
               <InsightPieChart pieChartData={pieChartData} metric={metric} />
             ) : (
-              <InsightTable data={groupData} />
+              <InsightTable data={groupDataSorted} onSort={handleGroupSort} />
             )}
           </CardContent>
           <CardActions

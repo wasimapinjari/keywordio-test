@@ -35,7 +35,7 @@ const campaignsData = [
     revenue: '175245',
   },
   {
-    campaigns: 'Facewash',
+    campaigns: 'Facewash 2',
     clicks: '4978',
     cost: '29370',
     conversions: '189',
