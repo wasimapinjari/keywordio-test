@@ -274,7 +274,9 @@ function InsightPieChart({ pieChartData }) {
           },
         ]}
         {...size}
+        sx={{position: "relative"}}
       />
+      <Box sx={{position: "absolute", top: 0, left: "800px", width: "300px", height: "300px", bgcolor: "white"}} />
       <Stack sx={{ position: 'absolute', top: '35%', left: '56%' }} gap={2}>
         {pieChartData.map((data, index) => {
           const value = Math.floor(
