@@ -16,7 +16,7 @@ import { SubmitModal } from './CreateTextAd';
 function Input({ label, placeholder }) {
   return (
     <>
-      <FormLabel sx={{ pb: .6 }}>
+      <FormLabel sx={{ pb: 0.6 }}>
         <Typography sx={{ fontWeight: 'bold' }} variant='body2'>
           {label}
         </Typography>
@@ -155,7 +155,7 @@ function CreateMediaAd() {
         >
           Submit
         </Button>
-        <SubmitModal open={open} setOpen={setOpen} />
+        {open && <SubmitModal />}
       </CardActions>
     </Card>
   );

@@ -92,9 +92,9 @@ function Header(props) {
                 size='large'
                 sx={{
                   color: '#333',
-                  '& > *': { textDecoration: 'none' },
+                  '& > *': { textDecoration: "none", borderBottom: '2px solid transparent' },
                   fontSize: '1rem',
-                  '&:hover > *': { color: '#555', textDecoration: 'underline' },
+                  '&:hover > *': { textDecoration: "none", color: '#555', borderBottom: '2px solid #555' },
                   transition: '.2s ease-out',
                 }}
               >

@@ -6,7 +6,6 @@ import {
   CardContent,
   FormControl,
   FormLabel,
-  Modal,
   OutlinedInput,
   Stack,
   Typography,
@@ -40,39 +39,35 @@ const style = {
   p: 6,
 };
 
-export function SubmitModal({ open, setOpen }) {
+export function SubmitModal() {
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            height: '100vh',
-            width: '100vw',
-            backdropFilter: 'blur(10px)',
-          }}
-        >
-          <Box sx={style}>
-            <Stack alignItems='center' gap={1}>
-              <CheckCircleIcon fontSize='large' sx={{ color: '#0096FF' }} />
-              <Typography
-                id='modal-modal-title'
-                sx={{ fontWeight: 'bold' }}
-                variant='subtitle1'
-                component='h2'
-              >
-                Submitted
-              </Typography>
-            </Stack>
-          </Box>
-        </Box>
-      </Modal>
-    </div>
+    <Box
+      sx={{
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        top: 0,
+        left: 0,
+        backdropFilter: 'blur(10px)',
+        '::-webkit-backdrop-filter': 'blur(10px)',
+      }}
+      aria-labelledby='modal-modal-title'
+      aria-describedby='modal-modal-description'
+    >
+      <Box sx={style}>
+        <Stack alignItems='center' gap={1}>
+          <CheckCircleIcon fontSize='large' sx={{ color: '#0096FF' }} />
+          <Typography
+            id='modal-modal-title'
+            sx={{ fontWeight: 'bold' }}
+            variant='subtitle1'
+            component='h2'
+          >
+            Submitted
+          </Typography>
+        </Stack>
+      </Box>
+    </Box>
   );
 }
 
@@ -81,10 +76,12 @@ function CreateMediaAd() {
   const navigate = useNavigate();
   function handleSubmit() {
     setOpen(true);
-    setTimeout(() => navigate('/create'), 600);
+    setTimeout(() => {
+      navigate('/create');
+    }, 600);
   }
   return (
-    <Card variant='outlined'>
+    <Card variant='outlined' sx={{ position: 'relative' }}>
       <CardContent sx={{ pb: 0 }}>
         <Typography sx={{ fontWeight: 'bold' }}>Create Text & Media</Typography>
       </CardContent>
@@ -181,7 +178,7 @@ function CreateMediaAd() {
         >
           Submit
         </Button>
-        <SubmitModal open={open} setOpen={setOpen} />
+        {open && <SubmitModal />}
       </CardActions>
     </Card>
   );
