@@ -378,7 +378,7 @@ function Dashboard() {
     if (currentSortGroup === key)
       return setGroupDataSorted(sortGroup(key, groupData));
     currentSortGroup = key;
-    groupSortAsc = true;
+    groupSortAsc = false;
     handleGroupSort(key);
   }
   return (
