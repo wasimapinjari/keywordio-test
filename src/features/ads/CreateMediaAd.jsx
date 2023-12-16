@@ -6,12 +6,15 @@ import {
   CardContent,
   FormControl,
   FormLabel,
+  MenuItem,
   OutlinedInput,
+  Select,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SubmitModal } from './CreateTextAd';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 
 function Input({ label, placeholder }) {
   return (
@@ -28,6 +31,7 @@ function Input({ label, placeholder }) {
 
 function CreateMediaAd() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   function handleSubmit() {
     setOpen(true);
@@ -104,11 +108,53 @@ function CreateMediaAd() {
                 placeholder='Add your business name'
               />
             </FormControl>
-            <FormControl sx={{ gridColumn: '4 / 3 span' }}>
-              <Input
-                label='Button Label'
+            <FormControl
+              sx={{ gridColumn: '4 / 3 span', position: 'relative' }}
+            >
+              <FormLabel sx={{ pb: 1 }}>
+                <Typography sx={{ fontWeight: 'bold' }} variant='body2'>
+                  Button Label
+                </Typography>
+              </FormLabel>
+              <Select
+                size='small'
+                displayEmpty
                 placeholder='Select a label that best suits your ad'
-              />
+                defaultValue='clicks'
+                // value={metric}
+                // onChange={onMetricChange}
+                inputProps={{ 'aria-label': 'Without label' }}
+                sx={{
+                  height: "100%",
+                  fontSize: 'small',
+                  '& > *': {
+                    fontSize: 'small',
+                    // p: '4px 10px !important',
+                  },
+                }}
+                onOpen={() => setActive(true)}
+                onClose={() => setActive(false)}
+              >
+                <MenuItem value='clicks'>Clicks</MenuItem>
+                <MenuItem value='cost'>Cost</MenuItem>
+                <MenuItem value='conversions'>Conversions</MenuItem>
+                <MenuItem value='revenue'>Revenue</MenuItem>
+              </Select>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  height: 0.2,
+                  right: 6,
+                  top: 38,
+                  bgcolor: 'white',
+                }}
+              >
+                {active ? (
+                  <KeyboardArrowUp fontSize='1rem' />
+                ) : (
+                  <KeyboardArrowDown fontSize='1rem' />
+                )}
+              </Box>
             </FormControl>
             <FormControl sx={{ gridColumn: '1 / -1' }}>
               <Input
