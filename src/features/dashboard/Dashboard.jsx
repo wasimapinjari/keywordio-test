@@ -31,7 +31,12 @@ import {
   sumColumn,
 } from '../../utils/helpers';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { DonutLarge, TableChartOutlined } from '@mui/icons-material';
+import {
+  DonutLarge,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  TableChartOutlined,
+} from '@mui/icons-material';
 
 function CardHeader({ children }) {
   return (
@@ -43,8 +48,8 @@ function CardHeader({ children }) {
         paddingBottom: 0.6,
         alignItems: 'center',
       }}
-      direction="row"
-      spacing={1}
+      direction='row'
+      spacing={0.4}
     >
       <Typography
         sx={{ flexGrow: 1, fontWeight: 'bold', color: '#444' }}
@@ -61,8 +66,9 @@ function CardHeader({ children }) {
 }
 
 function SelectMetric({ metric, onMetricChange }) {
+  const [active, setActive] = useState(false)
   return (
-    <FormControl sx={{ minWidth: 120 }}>
+    <FormControl sx={{ minWidth: 100, position: 'relative' }}>
       <Select
         size='small'
         displayEmpty
@@ -70,13 +76,26 @@ function SelectMetric({ metric, onMetricChange }) {
         value={metric}
         onChange={onMetricChange}
         inputProps={{ 'aria-label': 'Without label' }}
-        sx={{ fontSize: 'small', '& > *': { fontSize: 'small', py: 0.4 } }}
+        sx={{
+          fontSize: 'small',
+          '& > *': {
+            fontSize: 'small',
+            py: 0.4,
+            p: 0.8,
+            transform: 'scale(.9)',
+          },
+        }}
+        onOpen={() => setActive(true)}
+        onClose={() => setActive(false)}
       >
         <MenuItem value='clicks'>Clicks</MenuItem>
         <MenuItem value='cost'>Cost</MenuItem>
         <MenuItem value='conversions'>Conversions</MenuItem>
         <MenuItem value='revenue'>Revenue</MenuItem>
       </Select>
+      <Box sx={{ position: 'absolute', right: 10, top: 5 }}>
+        {active ? <KeyboardArrowDown fontSize='1rem'/> : <KeyboardArrowUp fontSize='1rem'/>}
+      </Box>
     </FormControl>
   );
 }
