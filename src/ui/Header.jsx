@@ -70,10 +70,9 @@ function Header(props) {
             component='div'
             sx={{
               flexGrow: 1,
-              color: '#333',
               fontWeight: '600',
               display: { xs: 'none', sm: 'block' },
-              '& > *': { textDecoration: 'none' },
+              '& > *': { textDecoration: 'none', color: '#333' },
               '&:hover > *': { textDecoration: 'none', color: '#555' },
               transition: '.2s ease-out',
             }}
@@ -92,7 +91,7 @@ function Header(props) {
                 size='large'
                 sx={{
                   color: '#333',
-                  '& > *': { textDecoration: "none", borderBottom: '2px solid transparent' },
+                  '& > *': { color: '#333', textDecoration: "none", borderBottom: '2px solid transparent' },
                   fontSize: '1rem',
                   '&:hover > *': { textDecoration: "none", color: '#555', borderBottom: '2px solid #555' },
                   transition: '.2s ease-out',
