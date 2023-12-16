@@ -49,7 +49,7 @@ function CardHeader({ children }) {
         alignItems: 'center',
       }}
       direction='row'
-      spacing={0.4}
+      spacing={0.8}
     >
       <Typography
         sx={{ flexGrow: 1, fontWeight: 'bold', color: '#444' }}
