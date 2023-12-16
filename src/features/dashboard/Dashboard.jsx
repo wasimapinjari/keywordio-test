@@ -35,7 +35,7 @@ import { DonutLarge, TableChartOutlined } from '@mui/icons-material';
 
 function CardHeader({ children }) {
   return (
-    <Box
+    <Stack
       sx={{
         display: 'flex',
         p: 1,
@@ -43,6 +43,8 @@ function CardHeader({ children }) {
         paddingBottom: 0.6,
         alignItems: 'center',
       }}
+      direction="row"
+      spacing={1}
     >
       <Typography
         sx={{ flexGrow: 1, fontWeight: 'bold', color: '#444' }}
@@ -54,7 +56,7 @@ function CardHeader({ children }) {
       <IconButton size='small'>
         <HelpOutlineIcon sx={{ fill: '#DDD' }} />
       </IconButton>
-    </Box>
+    </Stack>
   );
 }
 
