@@ -4,22 +4,14 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
-  Checkbox,
   FormControl,
   FormLabel,
-  Grid,
   OutlinedInput,
-  Paper,
-  Stack,
-  TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SubmitModal } from './CreateTextAd';
-
-const routes = ['/create', 'text', 'text-media', 'media'];
 
 function Input({ label, placeholder }) {
   return (
@@ -36,15 +28,7 @@ function Input({ label, placeholder }) {
 
 function CreateMediaAd() {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(['Text', 'Media']);
   const navigate = useNavigate();
-  function handleSelected(adType) {
-    const index = selected.indexOf(adType);
-    if (index === -1) return setSelected([...selected, adType]);
-    return setSelected(selected.filter((ad) => ad !== adType));
-  }
-  const route =
-    selected.length === 1 ? selected[0].toLowerCase() + '-ad' : '/create';
   function handleSubmit() {
     setOpen(true);
     setTimeout(() => navigate('/create'), 600);

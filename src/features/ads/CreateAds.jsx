@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
@@ -10,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CompactCard({ type, img, selected, onSelected }) {
   return (

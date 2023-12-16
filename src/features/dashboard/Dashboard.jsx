@@ -271,10 +271,10 @@ function Dashboard() {
   const [pieChartData, setPieChartData] = useState(
     createData(groupData, 'clicks')
   );
-  const [campaignsSort, setCampaignsSort] = useState("campaigns");
-  const [groupSort, setGroupSort] = useState("group");
-  const [campaignsSortAsc, setCampaignsSortAsc] = useState(true);
-  const [groupSortAsc, setGroupSortAsc] = useState(true);
+  // const [campaignsSort, setCampaignsSort] = useState("campaigns");
+  // const [groupSort, setGroupSort] = useState("group");
+  // const [campaignsSortAsc, setCampaignsSortAsc] = useState(true);
+  // const [groupSortAsc, setGroupSortAsc] = useState(true);
   const [metric, setMetric] = useState('clicks');
   const handleMetricChange = (event) => {
     setMetric(event.target.value);
