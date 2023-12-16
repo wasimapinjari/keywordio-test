@@ -68,7 +68,7 @@ function SelectMetric({ metric, onMetricChange }) {
         value={metric}
         onChange={onMetricChange}
         inputProps={{ 'aria-label': 'Without label' }}
-        sx={{ fontSize: 'small', '& > *': { fontSize: 'small' } }}
+        sx={{ fontSize: 'small', '& > *': { fontSize: 'small', py: 0.4 } }}
       >
         <MenuItem value='clicks'>Clicks</MenuItem>
         <MenuItem value='cost'>Cost</MenuItem>
@@ -210,7 +210,7 @@ const size = {
   height: 300,
 };
 
-function InsightPieChart({ pieChartData, metric}) {
+function InsightPieChart({ pieChartData, metric }) {
   const percentageSum = pieChartData.reduce((acc, current) => {
     return (
       acc + Math.floor((current.value / sumColumn(pieChartData, 'value')) * 100)
@@ -240,8 +240,8 @@ function InsightPieChart({ pieChartData, metric}) {
         {pieChartData.map((data) => {
           const value = Math.floor(
             (data.value / sumColumn(pieChartData, 'value')) * 100
-          ) 
-          const offset = data.label === "Unknown" ? difference : 0
+          );
+          const offset = data.label === 'Unknown' ? difference : 0;
           return (
             <Stack direction='row' gap={2} alignItems='center'>
               <Box
@@ -299,17 +299,16 @@ function Dashboard() {
         >
           <CardContent sx={{ p: 0, paddingBottom: '0 !important' }}>
             <CardHeader>
-              <SelectMetric
-                metric={metric}
-                onMetricChange={handleMetricChange}
-              />
+              {pieChartView && (
+                <SelectMetric
+                  metric={metric}
+                  onMetricChange={handleMetricChange}
+                />
+              )}
             </CardHeader>
             <Divider />
             {pieChartView ? (
-              <InsightPieChart
-                pieChartData={pieChartData}
-                metric={metric}
-              />
+              <InsightPieChart pieChartData={pieChartData} metric={metric} />
             ) : (
               <InsightTable data={groupData} />
             )}
