@@ -72,7 +72,7 @@ function Header(props) {
               flexGrow: 1,
               fontWeight: '600',
               display: { xs: 'none', sm: 'block' },
-              '& > *': { textDecoration: 'none', color: '#333' },
+              '& > *': { textDecoration: 'none', color: '#212529' },
               '&:hover > *': { textDecoration: 'none', color: '#555' },
               transition: '.2s ease-out',
             }}
