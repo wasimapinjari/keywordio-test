@@ -68,7 +68,7 @@ function CardHeader({ children }) {
 function SelectMetric({ metric, onMetricChange }) {
   const [active, setActive] = useState(false)
   return (
-    <FormControl sx={{ minWidth: 100, position: 'relative' }}>
+    <FormControl sx={{ minWidth: 120, position: 'relative' }}>
       <Select
         size='small'
         displayEmpty
@@ -91,7 +91,7 @@ function SelectMetric({ metric, onMetricChange }) {
         <MenuItem value='revenue'>Revenue</MenuItem>
       </Select>
       <Box sx={{ position: 'absolute', right: 10, top: 7, bgcolor: "white" }}>
-        {active ? <KeyboardArrowDown fontSize='1rem'/> : <KeyboardArrowUp fontSize='1rem'/>}
+        {active ? <KeyboardArrowUp fontSize='1rem'/> : <KeyboardArrowDown fontSize='1rem'/>}
       </Box>
     </FormControl>
   );
