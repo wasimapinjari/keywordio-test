@@ -38,7 +38,7 @@ function CreateMediaAd() {
     setTimeout(() => navigate('/create'), 600);
   }
   return (
-    <Card variant='outlined'>
+    <Card variant='outlined' sx={{ position: 'relative'}}>
       <CardContent sx={{ pb: 0 }}>
         <Typography sx={{ fontWeight: 'bold' }}>Create Text & Media</Typography>
       </CardContent>

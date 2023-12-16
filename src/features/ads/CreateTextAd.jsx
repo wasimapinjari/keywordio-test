@@ -49,6 +49,7 @@ export function SubmitModal() {
         position: 'absolute',
         height: '100%',
         width: '100%',
+        borderRadius: "4px",
         top: 0,
         left: 0,
         backdropFilter: 'blur(10px)',
@@ -80,9 +81,9 @@ function CreateMediaAd() {
   const navigate = useNavigate();
   function handleSubmit() {
     setOpen(true);
-    setTimeout(() => {
-      navigate('/create');
-    }, 600);
+    // setTimeout(() => {
+    //   navigate('/create');
+    // }, 600);
   }
   return (
     <Card variant='outlined' sx={{ position: 'relative' }}>
