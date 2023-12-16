@@ -80,9 +80,9 @@ function CreateMediaAd() {
   const navigate = useNavigate();
   function handleSubmit() {
     setOpen(true);
-    // setTimeout(() => {
-    //   navigate('/create');
-    // }, 600);
+    setTimeout(() => {
+      navigate('/create');
+    }, 600);
   }
   return (
     <Card variant='outlined' sx={{ position: 'relative' }}>
