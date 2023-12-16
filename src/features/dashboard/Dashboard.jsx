@@ -21,13 +21,12 @@ import {
 } from '@mui/material';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import groupData from '../../data/groupData';
 import campaignsData from '../../data/campaignsData';
 import {
   addCommas,
   capitalizeFirstLetter,
-  changet,
   createData,
   sumColumn,
 } from '../../utils/helpers';
