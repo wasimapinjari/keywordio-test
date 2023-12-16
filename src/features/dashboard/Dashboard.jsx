@@ -142,6 +142,7 @@ function InsightTable({ data, onSort }) {
                   sx={{
                     fontSize: '.9rem',
                     fill: '#CCC',
+                    "&:hover": {fill: '#444'}
                   }}
                   onClick={() => onSort(objectKeys[0])}
                 />
@@ -164,6 +165,7 @@ function InsightTable({ data, onSort }) {
                         top: '.95rem',
                         right: '.8rem',
                         fill: '#CCC',
+                        "&:hover": {fill: '#444'}
                       }}
                       onClick={() => onSort(key)}
                     />
