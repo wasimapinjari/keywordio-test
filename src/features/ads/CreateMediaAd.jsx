@@ -9,6 +9,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
@@ -118,27 +119,25 @@ function CreateMediaAd() {
               </FormLabel>
               <Select
                 size='small'
-                displayEmpty
-                placeholder='Select a label that best suits your ad'
-                defaultValue='clicks'
+                defaultValue="none"
                 // value={metric}
                 // onChange={onMetricChange}
                 inputProps={{ 'aria-label': 'Without label' }}
                 sx={{
-                  height: "100%",
-                  fontSize: 'small',
-                  '& > *': {
-                    fontSize: 'small',
-                    // p: '4px 10px !important',
-                  },
+                  height: '100%',
+                  color: "#999",
+                  mt: -.4
                 }}
                 onOpen={() => setActive(true)}
                 onClose={() => setActive(false)}
               >
-                <MenuItem value='clicks'>Clicks</MenuItem>
-                <MenuItem value='cost'>Cost</MenuItem>
-                <MenuItem value='conversions'>Conversions</MenuItem>
-                <MenuItem value='revenue'>Revenue</MenuItem>
+                <MenuItem value='none' sx={{color:"#999"}}>
+                  Select a label that best suits your ad
+                </MenuItem>
+                <MenuItem value='clicks'>Shop Now</MenuItem>
+                <MenuItem value='cost'>Try Free</MenuItem>
+                <MenuItem value='conversions'>See Offers</MenuItem>
+                <MenuItem value='revenue'>Learn More</MenuItem>
               </Select>
               <Box
                 sx={{
