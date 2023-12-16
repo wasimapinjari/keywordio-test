@@ -80,9 +80,6 @@ function SelectMetric({ metric, onMetricChange }) {
           fontSize: 'small',
           '& > *': {
             fontSize: 'small',
-            py: 0.4,
-            p: 0.8,
-            transform: 'scale(.9)',
           },
         }}
         onOpen={() => setActive(true)}
@@ -93,7 +90,7 @@ function SelectMetric({ metric, onMetricChange }) {
         <MenuItem value='conversions'>Conversions</MenuItem>
         <MenuItem value='revenue'>Revenue</MenuItem>
       </Select>
-      <Box sx={{ position: 'absolute', right: 10, top: 5 }}>
+      <Box sx={{ position: 'absolute', right: 10, top: 7, bgcolor: "white" }}>
         {active ? <KeyboardArrowDown fontSize='1rem'/> : <KeyboardArrowUp fontSize='1rem'/>}
       </Box>
     </FormControl>
