@@ -142,7 +142,7 @@ function InsightTable({ data, onSort }) {
                   sx={{
                     fontSize: '.9rem',
                     fill: '#CCC',
-                    "&:hover": {fill: '#444'}
+                    '&:hover': { fill: '#444' },
                   }}
                   onClick={() => onSort(objectKeys[0])}
                 />
@@ -165,7 +165,7 @@ function InsightTable({ data, onSort }) {
                         top: '.95rem',
                         right: '.8rem',
                         fill: '#CCC',
-                        "&:hover": {fill: '#444'}
+                        '&:hover': { fill: '#444' },
                       }}
                       onClick={() => onSort(key)}
                     />
@@ -199,13 +199,13 @@ function InsightTable({ data, onSort }) {
                 <TableCell align='right'>
                   {addCommas(objectValueArray[1])}
                 </TableCell>
-                <TableCell align='right'>
+                <TableCell align='right' sx={{textWrap: "nowrap"}}>
                   USD {addCommas(objectValueArray[2])}
                 </TableCell>
                 <TableCell align='right'>
                   {addCommas(objectValueArray[3])}
                 </TableCell>
-                <TableCell align='right'>
+                <TableCell align='right' sx={{textWrap: "nowrap"}}>
                   USD {addCommas(objectValueArray[4])}
                 </TableCell>
               </TableRow>
@@ -228,13 +228,13 @@ function InsightTable({ data, onSort }) {
             <TableCell align='right'>
               {addCommas(sumColumn(data, 'clicks'))}
             </TableCell>
-            <TableCell align='right'>
+            <TableCell align='right' sx={{textWrap: "nowrap"}}>
               USD {addCommas(sumColumn(data, 'cost'))}
             </TableCell>
             <TableCell align='right'>
               {addCommas(sumColumn(data, 'conversions'))}
             </TableCell>
-            <TableCell align='right'>
+            <TableCell align='right' sx={{textWrap: "nowrap"}}>
               USD {addCommas(sumColumn(data, 'revenue'))}
             </TableCell>
           </TableRow>
@@ -243,11 +243,6 @@ function InsightTable({ data, onSort }) {
     </TableContainer>
   );
 }
-
-const size = {
-  width: 1000,
-  height: 300,
-};
 
 function InsightPieChart({ pieChartData }) {
   const percentageSum = pieChartData.reduce((acc, current) => {
@@ -273,10 +268,20 @@ function InsightPieChart({ pieChartData }) {
             cy: 160,
           },
         ]}
-        {...size}
-        sx={{position: "relative"}}
+        width = {1000}
+        height = {300}
+        sx={{ position: 'relative', transform: {md: "scale(.9)"} }}
       />
-      <Box sx={{position: "absolute", top: 0, left: "800px", width: "300px", height: "300px", bgcolor: "white"}} />
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: '800px',
+          width: '300px',
+          height: '300px',
+          bgcolor: 'white',
+        }}
+      />
       <Stack sx={{ position: 'absolute', top: '35%', left: '56%' }} gap={2}>
         {pieChartData.map((data, index) => {
           const value = Math.floor(
@@ -312,9 +317,9 @@ function InsightPieChart({ pieChartData }) {
 }
 
 let currentSortCampaigns = 'campaigns';
-let campaignsSortAsc = true;
+let campaignsSortAsc = false;
 let currentSortGroup = 'group';
-let groupSortAsc = true;
+let groupSortAsc = false;
 
 function sortCampaigns(key, data) {
   if (key === Object.keys(data[0])[0]) {
@@ -366,7 +371,7 @@ function Dashboard() {
     if (currentSortCampaigns === key)
       return setCampaignsDataSorted(sortCampaigns(key, campaignsData));
     currentSortCampaigns = key;
-    campaignsSortAsc = true;
+    campaignsSortAsc = false;
     handleCampaignsSort(key);
   }
   function handleGroupSort(key) {
@@ -378,7 +383,7 @@ function Dashboard() {
   }
   return (
     <div>
-      <Stack spacing={4} direction='row'>
+      <Stack spacing={4} direction={{ xs: 'row' }}>
         <Card
           variant='outlined'
           sx={{ width: '50%', '&:last-child': { p: 0 } }}
