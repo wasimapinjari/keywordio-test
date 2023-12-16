@@ -54,7 +54,7 @@ function Header(props) {
   return (
     <Box component='header' sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar variant='outlined' component='nav' sx={{ bgcolor: 'white' }}>
+      <AppBar variant='outlined' elevation={0} component='nav' sx={{ bgcolor: 'white' }}>
         <Toolbar>
           <IconButton
             color='inherit'
